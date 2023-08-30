@@ -1,0 +1,112 @@
+# Configure the Cloudflare provider using the required_providers stanza
+# required with Terraform 0.13 and beyond. You may optionally use version
+# directive to prevent breaking changes occurring unannounced.
+terraform {
+  cloud {
+    organization = "asztalosgyula"
+
+    workspaces {
+      name = "terraform-project"
+    }
+  }
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
+  }
+}
+
+resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed108dd2f25" {
+  name    = "asztalos.net"
+  proxied = false
+  ttl     = 1
+  type    = "A"
+  value   = "31.46.220.13"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d72e6e11bbb" {
+  name    = "*.local"
+  proxied = false
+  ttl     = 1
+  type    = "CNAME"
+  value   = "asztalos.net"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_1bb8fe9f88bbabbb1eeb9e68e6da10fd" {
+  name    = "local"
+  proxied = false
+  ttl     = 1
+  type    = "CNAME"
+  value   = "asztalos.net"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_cd5c8e6c433115f918c7dbf3d0a3a58f" {
+  name    = "sig1._domainkey"
+  proxied = false
+  ttl     = 3600
+  type    = "CNAME"
+  value   = "sig1.dkim.asztalos.net.at.icloudmailadmin.com"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_fa7fe93582b72b86ad988c7e53231388" {
+  name     = "asztalos.net"
+  priority = 10
+  proxied  = false
+  ttl      = 3600
+  type     = "MX"
+  value    = "mx01.mail.icloud.com"
+  zone_id  = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_c2b153bf6ff9452cd252f2aaac7a6da5" {
+  name     = "asztalos.net"
+  priority = 10
+  proxied  = false
+  ttl      = 3600
+  type     = "MX"
+  value    = "mx02.mail.icloud.com"
+  zone_id  = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_4e0669bea856b1f22fd7a1bcdf42bc30" {
+  name    = "asztalos.net"
+  proxied = false
+  ttl     = 120
+  type    = "TXT"
+  value   = "Fca2-RCcWWdRdbSAAAbmvWupYFY-JdTP3UCpIHP2yUU"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_e19dca3c2553b9608dbb3f9b43e09efe" {
+  name    = "asztalos.net"
+  proxied = false
+  ttl     = 3600
+  type    = "TXT"
+  value   = "v=spf1 include:icloud.com ~all"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_a2845f3f5c9c427af3515290cb5c68d3" {
+  name    = "asztalos.net"
+  proxied = false
+  ttl     = 3600
+  type    = "TXT"
+  value   = "apple-domain=CSdTNEh8JvlOlPNm"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_397463f674c69ac8ea5157937eb2344c" {
+  name    = "_dmarc"
+  proxied = false
+  ttl     = 1
+  type    = "TXT"
+  value   = "v=DMARC1;  p=none; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+
