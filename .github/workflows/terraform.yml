@@ -68,6 +68,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Configure 1Password Service Account
+      uses: 1password/load-secrets-action/configure@v1
+      with:
+        service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+    - name: Load secret
+      uses: 1password/load-secrets-action@v1
+      env:
+        TF_API_TOKEN: op://Service Vault/Terraform API Key/credential
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
