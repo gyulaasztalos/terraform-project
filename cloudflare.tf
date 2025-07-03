@@ -24,6 +24,10 @@ resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed
   type    = "A"
   value   = "84.1.62.209"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+
+  lifecycle {
+    ignore_changes = [ value ]
+  }
 }
 
 resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d72e6e11bbb" {
