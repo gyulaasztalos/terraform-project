@@ -20,14 +20,14 @@ terraform {
 resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed108dd2f25" {
   name    = "asztalos.net"
   proxied = false
-  ttl     = 1
+  ttl     = 600
   type    = "A"
-  value   = "31.46.220.13"
+  value   = "84.1.62.209"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
 resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d72e6e11bbb" {
-  name    = "*.local"
+  name    = "*.local.asztalos.net"
   proxied = false
   ttl     = 1
   type    = "CNAME"
@@ -36,7 +36,7 @@ resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d7
 }
 
 resource "cloudflare_record" "terraform_managed_resource_1bb8fe9f88bbabbb1eeb9e68e6da10fd" {
-  name    = "local"
+  name    = "local.asztalos.net"
   proxied = false
   ttl     = 1
   type    = "CNAME"
@@ -45,7 +45,7 @@ resource "cloudflare_record" "terraform_managed_resource_1bb8fe9f88bbabbb1eeb9e6
 }
 
 resource "cloudflare_record" "terraform_managed_resource_cd5c8e6c433115f918c7dbf3d0a3a58f" {
-  name    = "sig1._domainkey"
+  name    = "sig1._domainkey.asztalos.net"
   proxied = false
   ttl     = 3600
   type    = "CNAME"
@@ -101,12 +101,10 @@ resource "cloudflare_record" "terraform_managed_resource_a2845f3f5c9c427af351529
 }
 
 resource "cloudflare_record" "terraform_managed_resource_397463f674c69ac8ea5157937eb2344c" {
-  name    = "_dmarc"
+  name    = "_dmarc.asztalos.net"
   proxied = false
   ttl     = 1
   type    = "TXT"
-  value   = "v=DMARC1;  p=none; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
+  value   = "v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
-
-
