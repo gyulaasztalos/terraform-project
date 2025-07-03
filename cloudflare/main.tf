@@ -6,7 +6,7 @@ terraform {
     organization = "asztalosgyula"
 
     workspaces {
-      name = "terraform-project"
+      name = "homelab-cloudflare"
     }
   }
   required_providers {
@@ -26,7 +26,7 @@ resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 
   lifecycle {
-    ignore_changes = [ value ]
+    ignore_changes = [value]
   }
 }
 
