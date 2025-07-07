@@ -78,3 +78,17 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+      - name: Get Terraform Outputs
+        id: tf-outputs
+        if: ${{ matrix.provider }} == 'backblaze'
+        run: |
+          echo "APPLICATION_KEY_ID=$(terraform output -raw application_key_id)" >> $GITHUB_OUTPUT
+          echo "APPLICATION_KEY=$(terraform output -raw application_key)" >> $GITHUB_OUTPUT
+
+      - name: Update 1Password Item with Application Key
+        if: ${{ matrix.provider }} == 'backblaze'
+        run: |
+          op item edit "backblaze-cnpg-key" --vault kubernetes \
+            application_key_id="${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" \
+            application_key="${{ steps.tf-outputs.outputs.APPLICATION_KEY }}"
