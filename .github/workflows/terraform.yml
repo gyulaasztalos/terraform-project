@@ -86,9 +86,14 @@ jobs:
           echo "APPLICATION_KEY_ID=$(terraform output -raw application_key_id)" >> $GITHUB_OUTPUT
           echo "APPLICATION_KEY=$(terraform output -raw application_key)" >> $GITHUB_OUTPUT
 
+      - name: Install 1Password CLI
+        uses: 1Password/install-cli-action@v1
+
       - name: Update 1Password Item with Application Key
         if: ${{ matrix.provider }} == 'backblaze'
         run: |
           op item edit "backblaze-cnpg-key" --vault kubernetes \
             application_key_id="${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" \
             application_key="${{ steps.tf-outputs.outputs.APPLICATION_KEY }}"
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
