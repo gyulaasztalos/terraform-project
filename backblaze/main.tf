@@ -38,8 +38,8 @@ resource "b2_bucket" "cnpg_backup" {
 }
 
 resource "b2_application_key" "cnpg_backup_key" {
-  key_name     = "${var.project_name}-cnpg-backup-key-${var.environment}"
-  bucket_id    = b2_bucket.cnpg_backup.bucket_id
+  key_name  = "${var.project_name}-cnpg-backup-key-${var.environment}"
+  bucket_id = b2_bucket.cnpg_backup.bucket_id
   capabilities = [
     "listFiles",
     "readFiles",
