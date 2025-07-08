@@ -92,7 +92,7 @@ jobs:
       - name: Update 1Password Item with Application Key
         if: ${{ matrix.provider }} == 'backblaze'
         run: |
-          op item edit "backblaze-cnpg-key" --vault kubernetes \
+          op item edit "backblaze-cnpg-key" --vault kubernetes --session ${OP_SERVICE_ACCOUNT_TOKEN}\
             application_key_id="${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" \
             application_key="${{ steps.tf-outputs.outputs.APPLICATION_KEY }}"
         env:
