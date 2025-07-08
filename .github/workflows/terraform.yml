@@ -93,7 +93,6 @@ jobs:
         if: ${{ matrix.provider }} == 'backblaze'
         run: |
           op item edit "backblaze-cnpg-key" --vault kubernetes \
-            ps="Terraform managed secret" \
             application_key_id="${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" \
             application_key="${{ steps.tf-outputs.outputs.APPLICATION_KEY }}"
         env:
