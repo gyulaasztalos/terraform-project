@@ -95,23 +95,8 @@ jobs:
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
-      - name: Fetch 1Password Item as JSON
-        run: |
-          op item get backblaze-cnpg-key --vault kubernetes --format json > updated-backblaze-cnpg-key.json
+      - name: Update 1Password Item with Application Key
+        if: ${{ matrix.provider }} == 'backblaze'
+        run: op item edit "backblaze-cnpg-key" --format json --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.APPLICATION_KEY }}' op item edit backblaze-cnpg-key --vault kubernetes --template=updated-backblaze-cnpg-key.json < /dev/null
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-
-      - name: Update JSON Fields
-        run: |
-          jq --arg id "${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" \
-             --arg key "${{ steps.tf-outputs.outputs.APPLICATION_KEY }}" \
-             '(.fields[] | select(.label=="application_key_id")).value = $id |
-              (.fields[] | select(.label=="application_key")).value = $key' \
-             updated-backblaze-cnpg-key.json > tmp.json && mv tmp.json updated-backblaze-cnpg-key.json
-
-      - name: Update 1Password Item from Template
-        run: |
-          op item edit backblaze-cnpg-key --vault kubernetes --template=updated-backblaze-cnpg-key.json
-        env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-
