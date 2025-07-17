@@ -127,7 +127,7 @@ resource "cloudflare_ruleset" "github_redirect" {
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
   name    = "github.asztalos.net redirect"
   kind    = "zone"
-  phase = "http_request_dynamic_redirect"
+  phase   = "http_request_dynamic_redirect"
 
   rules {
     enabled     = true
