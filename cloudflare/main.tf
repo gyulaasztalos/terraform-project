@@ -23,11 +23,11 @@ resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed
   proxied = false
   ttl     = 600
   type    = "A"
-  value   = "84.1.62.209"
+  content = "84.1.62.209"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [content]
   }
 }
 
@@ -36,7 +36,7 @@ resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d7
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  value   = "asztalos.net"
+  content = "asztalos.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -45,7 +45,7 @@ resource "cloudflare_record" "terraform_managed_resource_1bb8fe9f88bbabbb1eeb9e6
   proxied = false
   ttl     = 1
   type    = "CNAME"
-  value   = "asztalos.net"
+  content = "asztalos.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -54,7 +54,7 @@ resource "cloudflare_record" "terraform_managed_resource_cd5c8e6c433115f918c7dbf
   proxied = false
   ttl     = 3600
   type    = "CNAME"
-  value   = "sig1.dkim.asztalos.net.at.icloudmailadmin.com"
+  content = "sig1.dkim.asztalos.net.at.icloudmailadmin.com"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -64,7 +64,7 @@ resource "cloudflare_record" "terraform_managed_resource_fa7fe93582b72b86ad988c7
   proxied  = false
   ttl      = 3600
   type     = "MX"
-  value    = "mx01.mail.icloud.com"
+  content  = "mx01.mail.icloud.com"
   zone_id  = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -74,7 +74,7 @@ resource "cloudflare_record" "terraform_managed_resource_c2b153bf6ff9452cd252f2a
   proxied  = false
   ttl      = 3600
   type     = "MX"
-  value    = "mx02.mail.icloud.com"
+  content  = "mx02.mail.icloud.com"
   zone_id  = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -83,7 +83,7 @@ resource "cloudflare_record" "terraform_managed_resource_4e0669bea856b1f22fd7a1b
   proxied = false
   ttl     = 120
   type    = "TXT"
-  value   = "Fca2-RCcWWdRdbSAAAbmvWupYFY-JdTP3UCpIHP2yUU"
+  content = "Fca2-RCcWWdRdbSAAAbmvWupYFY-JdTP3UCpIHP2yUU"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -92,7 +92,7 @@ resource "cloudflare_record" "terraform_managed_resource_e19dca3c2553b9608dbb3f9
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  value   = "v=spf1 include:icloud.com ~all"
+  content = "v=spf1 include:icloud.com ~all"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -101,7 +101,7 @@ resource "cloudflare_record" "terraform_managed_resource_a2845f3f5c9c427af351529
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  value   = "apple-domain=CSdTNEh8JvlOlPNm"
+  content = "apple-domain=CSdTNEh8JvlOlPNm"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -110,7 +110,7 @@ resource "cloudflare_record" "terraform_managed_resource_397463f674c69ac8ea51579
   proxied = false
   ttl     = 1
   type    = "TXT"
-  value   = "v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
+  content = "v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -119,7 +119,7 @@ resource "cloudflare_record" "github_asztalos_net" {
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  value   = "asztalos.net" // or any valid value; must be proxied
+  content = "asztalos.net" // or any valid content; must be proxied
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -140,7 +140,7 @@ resource "cloudflare_ruleset" "github_redirect" {
         preserve_query_string = false
 
         target_url {
-          value = "https://github.com/gyulaasztalos/${http.request.uri.path}"
+          value = "https://github.com/gyulaasztalos/$${http.request.uri.path}"
         }
       }
     }
