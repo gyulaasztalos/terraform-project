@@ -13,7 +13,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
 }
@@ -112,4 +112,39 @@ resource "cloudflare_record" "terraform_managed_resource_397463f674c69ac8ea51579
   type    = "TXT"
   value   = "v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "github_asztalos_net" {
+  name    = "github.asztalos.net"
+  proxied = true
+  ttl     = 1
+  type    = "CNAME"
+  value   = "asztalos.net" // or any valid value; must be proxied
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_ruleset" "github_redirect" {
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+  name    = "github.asztalos.net redirect"
+  kind    = "zone"
+  phase = "http_request_dynamic_redirect"
+
+  rules {
+    enabled     = true
+    description = "Redirect github.asztalos.net to GitHub profile"
+    action      = "redirect"
+
+    action_parameters {
+      from_value {
+        status_code          = 301
+        preserve_query_string = false
+
+        target_url {
+          value = "https://github.com/gyulaasztalos/${http.request.uri.path}"
+        }
+      }
+    }
+
+    expression = "http.host == \"github.asztalos.net\""
+  }
 }
