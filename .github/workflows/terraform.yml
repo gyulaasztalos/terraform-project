@@ -65,7 +65,7 @@ jobs:
           cli_config_credentials_token: ${{ steps.op-load-secret.outputs.TF_API_TOKEN }}
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -upgrade
 
       # Checks that all Terraform configuration files adhere to a canonical format
       - name: Terraform Format

@@ -136,7 +136,7 @@ resource "cloudflare_ruleset" "github_redirect" {
 
     action_parameters {
       from_value {
-        status_code          = 301
+        status_code           = 301
         preserve_query_string = false
 
         target_url {
