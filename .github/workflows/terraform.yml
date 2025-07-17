@@ -87,6 +87,7 @@ jobs:
           echo "APPLICATION_KEY=$(terraform output -raw application_key)" >> $GITHUB_OUTPUT
 
       - name: Install 1Password CLI
+        if: ${{ matrix.provider == 'backblaze' }}
         uses: 1Password/install-cli-action@v1
 
       - name: Update 1Password Item with Application Key
