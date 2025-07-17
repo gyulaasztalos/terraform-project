@@ -141,7 +141,7 @@ resource "cloudflare_ruleset" "github_redirect" {
         preserve_query_string = false
 
         target_url {
-          value = "https://github.com/gyulaasztalos/$${http.request.uri.path}"
+          expression = "concat(\"https://github.com/gyulaasztalos/\", http.request.uri.path)"
         }
       }
     }
