@@ -83,7 +83,7 @@ resource "cloudflare_record" "terraform_managed_resource_4e0669bea856b1f22fd7a1b
   proxied = false
   ttl     = 120
   type    = "TXT"
-  content = "Fca2-RCcWWdRdbSAAAbmvWupYFY-JdTP3UCpIHP2yUU"
+  content = "\"Fca2-RCcWWdRdbSAAAbmvWupYFY-JdTP3UCpIHP2yUU\""
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -92,7 +92,7 @@ resource "cloudflare_record" "terraform_managed_resource_e19dca3c2553b9608dbb3f9
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  content = "v=spf1 include:icloud.com ~all"
+  content = "\"v=spf1 include:icloud.com ~all\""
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -101,7 +101,7 @@ resource "cloudflare_record" "terraform_managed_resource_a2845f3f5c9c427af351529
   proxied = false
   ttl     = 3600
   type    = "TXT"
-  content = "apple-domain=CSdTNEh8JvlOlPNm"
+  content = "\"apple-domain=CSdTNEh8JvlOlPNm\""
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
@@ -110,7 +110,7 @@ resource "cloudflare_record" "terraform_managed_resource_397463f674c69ac8ea51579
   proxied = false
   ttl     = 1
   type    = "TXT"
-  content = "v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net"
+  content = "\"v=DMARC1;  p=quarantine; rua=mailto:359163ccf0df46798200cf86e732815e@dmarc-reports.cloudflare.net\""
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
