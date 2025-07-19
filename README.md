@@ -6,6 +6,10 @@ You need to set OP_SERVICE_ACCOUNT_TOKEN secret in GitHub.
 Creating DNS config in cloudflare
 **Prerequisites:**
 1. Cloudflare account -> get API token
+  * zone.zone (read)
+  * zone.'single redirect' (edit)
+  * zone.'zone settings' (read)
+  * zone.dns (edit)
 2. Terraform Cloud account
 3. homelab-cloudflare workspace in terraform
 4. In the Terraform workspace create CLOUDFLARE_API_TOKEN environment variable (sensitive) with cloudflare API token in it
