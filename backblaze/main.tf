@@ -50,3 +50,41 @@ resource "b2_application_key" "cnpg_backup_key" {
 
   name_prefix = "cnpg-backup/"
 }
+
+resource "b2_bucket" "nas_backup" {
+  bucket_name = "${var.project_name}-nas-backup-${var.environment}"
+  bucket_type = "allPrivate"
+
+  bucket_info = {
+    purpose     = "NAS backups"
+    environment = "production"
+    managed_by  = "terraform"
+  }
+
+  default_server_side_encryption {
+    algorithm = "AES256"
+    mode      = "SSE-B2"
+  }
+
+  lifecycle_rules {
+    days_from_hiding_to_deleting  = 1
+    days_from_uploading_to_hiding = 5
+    file_name_prefix              = ""
+  }
+}
+
+resource "b2_application_key" "nas_backup_key" {
+  key_name  = "${var.project_name}-nas-backup-key-${var.environment}"
+  bucket_id = b2_bucket.nas_backup.bucket_id
+  capabilities = [
+    "listBuckets",
+    "listFiles",
+    "readFiles",
+    "shareFiles",
+    "writeFiles"
+  ]
+
+  name_prefix = "nas-backup/"
+}
+
+# Enable Object Lock manually on buckets for WORM in the B2 web interface!
