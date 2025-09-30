@@ -71,6 +71,10 @@ resource "b2_bucket" "nas_backup" {
     days_from_uploading_to_hiding = 5
     file_name_prefix              = ""
   }
+
+  file_lock_configuration {
+    is_file_lock_enabled = true
+  }
 }
 
 resource "b2_application_key" "nas_backup_key" {
