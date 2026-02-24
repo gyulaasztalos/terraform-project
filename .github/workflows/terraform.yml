@@ -98,8 +98,23 @@ jobs:
       - name: Update 1Password Item with Application Key
         if: ${{ matrix.provider == 'backblaze' }}
         run: |
-          op item edit "cnpg-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.APPLICATION_KEY }}' < /dev/null
-          op item edit "nas-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}' < /dev/null
-          op item edit "etcd-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY }}' < /dev/null
+          VAULT="kubernetes"
+
+          update_or_create() {
+            local ITEM_NAME="$1"
+            local KEY_ID="$2"
+            local KEY_VALUE="$3"
+
+            if op item list --vault "${VAULT}" "cnpg-backblaze-secret" | grep -q "^${ITEM_NAME}$"
+            then
+              op item edit "${ITEM_NAME}" --vault "${VAULT}" "application_key_id=${KEY_ID}" "application_key=${KEY_VALUE}" < /dev/null
+            else
+              op item create --category "API Credentials" --vault "${VAULT}" --title "${ITEM_NAME}" "application_key_id[STRING]=${KEY_ID}" "application_key[PASSWORD]=${KEY_VALUE}" < /dev/null
+            fi
+          }
+
+          update_or_create "cnpg-backblaze-secret" "${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}" "${{ steps.tf-outputs.outputs.APPLICATION_KEY }}"
+          update_or_create "nas-backblaze-secret" "${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}" "${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}"
+          update_or_create "etcd-backblaze-secret" "${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY_ID }}" "${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY }}"
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
