@@ -50,7 +50,7 @@ resource "cloudflare_record" "terraform_managed_resource_207da983a6ac58acbf316c4
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  content = "asztalos.net"
+  content = "github.com/gyulaasztalos/"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
