@@ -45,9 +45,9 @@ output "nas_bucket_name" {
   value       = b2_bucket.nas_backup.bucket_name
 }
 
-output "nas_bucket_id" {
+output "etcd_bucket_id" {
   description = "ID of the created B2 bucket"
-  value       = b2_bucket.nas_backup.bucket_id
+  value       = b2_bucket.etcd_backup.bucket_id
 }
 
 output "etcd_application_key_id" {
