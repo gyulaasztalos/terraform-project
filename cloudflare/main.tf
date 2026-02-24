@@ -24,13 +24,47 @@ resource "cloudflare_record" "terraform_managed_resource_8663194f1dcc57cdec36fed
   proxied = false
   ttl     = 600
   type    = "A"
-  content = "84.1.62.209"
+  content = "84.0.241.232"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
 
   lifecycle {
     ignore_changes = [content]
   }
 }
+
+resource "cloudflare_record" "terraform_managed_resource_e61c50ebcdbe13fb312bf66bad0a991e" {
+  name    = "asztalos.net"
+  proxied = false
+  ttl     = 600
+  type    = "AAAA"
+  content = "2001:4c4e:d:16dc:ddc2:da1f:714a:37a1"
+  zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+
+  lifecycle {
+    ignore_changes = [content]
+  }
+}
+
+resource "cloudflare_record" "terraform_managed_resource_207da983a6ac58acbf316c4736a56a8c" {
+    hostname    = "github.asztalos.net"
+    name        = "github"
+    proxiable   = true
+    proxied     = true
+    ttl         = 1
+    type        = "CNAME"
+    zone_id     = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
+resource "cloudflare_record" "terraform_managed_resource_dc575396724e6a3008ed90a8035bd75a" {
+    hostname    = "homeassistant.asztalos.net"
+    name        = "homeassistant"
+    proxiable   = true
+    proxied     = true
+    ttl         = 1
+    type        = "CNAME"
+    zone_id     = "c292442e09dde675d6f337a5f4d9e7a6"
+}
+
 
 resource "cloudflare_record" "terraform_managed_resource_694a6a23084a976f1a563d72e6e11bbb" {
   name    = "*.local.asztalos.net"
