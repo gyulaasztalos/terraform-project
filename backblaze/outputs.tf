@@ -40,9 +40,9 @@ output "nas_application_key" {
   sensitive   = true
 }
 
-output "nas_bucket_name" {
+output "etcd_bucket_name" {
   description = "Name of the created B2 bucket"
-  value       = b2_bucket.nas_backup.bucket_name
+  value       = b2_bucket.etcd_backup.bucket_name
 }
 
 output "etcd_bucket_id" {
