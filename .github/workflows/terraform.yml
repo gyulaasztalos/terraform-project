@@ -87,6 +87,9 @@ jobs:
           echo "APPLICATION_KEY=$(terraform output -raw application_key)" >> $GITHUB_OUTPUT
           echo "NAS_APPLICATION_KEY_ID=$(terraform output -raw nas_application_key_id)" >> $GITHUB_OUTPUT
           echo "NAS_APPLICATION_KEY=$(terraform output -raw nas_application_key)" >> $GITHUB_OUTPUT
+          echo "ETCD_APPLICATION_KEY_ID=$(terraform output -raw etcd_application_key_id)" >> $GITHUB_OUTPUT
+          echo "ETCD_APPLICATION_KEY=$(terraform output -raw etcd_application_key)" >> $GITHUB_OUTPUT
+
 
       - name: Install 1Password CLI
         if: ${{ matrix.provider == 'backblaze' }}
@@ -97,5 +100,6 @@ jobs:
         run: |
           op item edit "cnpg-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.APPLICATION_KEY }}' < /dev/null
           op item edit "nas-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}' < /dev/null
+          op item edit "etcd-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}' < /dev/null
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}

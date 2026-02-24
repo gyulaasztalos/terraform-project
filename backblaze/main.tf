@@ -14,6 +14,43 @@ terraform {
   }
 }
 
+resource "b2_bucket" "etcd_backup" {
+  bucket_name = "${var.project_name}-etcd-backup-${var.environment}"
+  bucket_type = "allPrivate"
+
+  bucket_info = {
+    purpose     = "Kubernetes etcd backups"
+    environment = "production"
+    managed_by  = "terraform"
+  }
+
+  default_server_side_encryption {
+    algorithm = "AES256"
+    mode      = "SSE-B2"
+  }
+
+  lifecycle_rules {
+    days_from_hiding_to_deleting  = 1
+    days_from_uploading_to_hiding = 30
+    file_name_prefix              = ""
+  }
+}
+
+resource "b2_application_key" "etcd_backup_key" {
+  key_name   = "${var.project_name}-etcd-backup-key-${var.environment}"
+  bucket_ids = b2_bucket.etcd_backup.bucket_id
+  capabilities = [
+    "listBuckets",
+    "listFiles",
+    "readFiles",
+    "shareFiles",
+    "writeFiles",
+    "deleteFiles"
+  ]
+
+  name_prefix = "etcd-backup/"
+}
+
 resource "b2_bucket" "cnpg_backup" {
   bucket_name = "${var.project_name}-cnpg-backup-${var.environment}"
   bucket_type = "allPrivate"
