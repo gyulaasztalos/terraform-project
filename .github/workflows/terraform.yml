@@ -100,6 +100,6 @@ jobs:
         run: |
           op item edit "cnpg-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.APPLICATION_KEY }}' < /dev/null
           op item edit "nas-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}' < /dev/null
-          op item edit "etcd-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.NAS_APPLICATION_KEY }}' < /dev/null
+          op item edit "etcd-backblaze-secret" --vault kubernetes 'application_key_id=${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY_ID }}' 'application_key=${{ steps.tf-outputs.outputs.ETCD_APPLICATION_KEY }}' < /dev/null
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
