@@ -61,6 +61,10 @@ resource "cloudflare_record" "terraform_managed_resource_dc575396724e6a3008ed90a
   type    = "CNAME"
   content = "asztalos.net"
   zone_id = "c292442e09dde675d6f337a5f4d9e7a6"
+
+  lifecycle {
+    ignore_changes = [content]
+  }
 }
 
 
