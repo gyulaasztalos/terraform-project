@@ -5,6 +5,7 @@ terraform {
       name = "homelab-backblaze"
     }
   }
+
   required_providers {
     b2 = {
       source  = "backblaze/b2"

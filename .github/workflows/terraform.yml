@@ -105,7 +105,7 @@ jobs:
             local KEY_ID="$2"
             local KEY_VALUE="$3"
 
-            if op item list --vault "${VAULT}" --categories "API Credential" | cut -f2 -w | grep -q "^{ITEM_NAME}"
+            if op item list --vault "${VAULT}" --categories "API Credential" | awk '$2~/^'"${ITEM_NAME}"$'/{res=1};END{if (res==1) {exit 0} else {exit 1}}'
             then
               op item edit "${ITEM_NAME}" --vault "${VAULT}" "application_key_id=${KEY_ID}" "application_key=${KEY_VALUE}" < /dev/null
             else
