@@ -46,23 +46,23 @@ resource "cloudflare_record" "terraform_managed_resource_e61c50ebcdbe13fb312bf66
 }
 
 resource "cloudflare_record" "terraform_managed_resource_207da983a6ac58acbf316c4736a56a8c" {
-    hostname    = "github.asztalos.net"
-    name        = "github"
-    proxiable   = true
-    proxied     = true
-    ttl         = 1
-    type        = "CNAME"
-    zone_id     = "c292442e09dde675d6f337a5f4d9e7a6"
+  hostname  = "github.asztalos.net"
+  name      = "github"
+  proxiable = true
+  proxied   = true
+  ttl       = 1
+  type      = "CNAME"
+  zone_id   = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
 resource "cloudflare_record" "terraform_managed_resource_dc575396724e6a3008ed90a8035bd75a" {
-    hostname    = "homeassistant.asztalos.net"
-    name        = "homeassistant"
-    proxiable   = true
-    proxied     = true
-    ttl         = 1
-    type        = "CNAME"
-    zone_id     = "c292442e09dde675d6f337a5f4d9e7a6"
+  hostname  = "homeassistant.asztalos.net"
+  name      = "homeassistant"
+  proxiable = true
+  proxied   = true
+  ttl       = 1
+  type      = "CNAME"
+  zone_id   = "c292442e09dde675d6f337a5f4d9e7a6"
 }
 
 
