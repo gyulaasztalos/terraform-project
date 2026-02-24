@@ -48,7 +48,7 @@ resource "b2_application_key" "etcd_backup_key" {
     "deleteFiles"
   ]
 
-  name_prefix = "snapshots/"
+  name_prefix = ""
 }
 
 resource "b2_bucket" "cnpg_backup" {
