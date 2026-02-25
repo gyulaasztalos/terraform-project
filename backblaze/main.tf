@@ -40,6 +40,7 @@ resource "b2_application_key" "etcd_backup_key" {
   key_name  = "${var.project_name}-etcd-backup-key-${var.environment}"
   bucket_id = b2_bucket.etcd_backup.bucket_id
   capabilities = [
+    "listBuckets",
     "listFiles",
     "readFiles",
     "writeFiles",
