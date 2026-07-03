@@ -7,7 +7,6 @@ terraform {
 
   cloud {
     organization = "asztalosgyula"
-
     workspaces {
       name = "homelab-cloudflare"
     }
