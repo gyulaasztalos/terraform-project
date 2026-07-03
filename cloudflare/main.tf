@@ -7,6 +7,7 @@ terraform {
 
   cloud {
     organization = "asztalosgyula"
+
     workspaces {
       name = "homelab-cloudflare"
     }
@@ -214,4 +215,17 @@ resource "cloudflare_ruleset" "homeassistant_mtls" {
       expression  = "(http.host eq \"homeassistant.asztalos.net\")"
     }
   ]
+}
+
+# Associates homeassistant.asztalos.net with the zone's active Cloudflare
+# Managed CA, so client certificates issued by that CA are accepted for
+# mTLS on this hostname. Cert issuance itself is intentionally not managed
+# here yet -- see chat history for the private-key handling tradeoffs.
+#
+# This is a per-zone singleton (Cloudflare provisions at most one of these
+# per zone), already holding this exact hostname from the manual setup in
+# the kcore.org guide -- see import.tf.
+resource "cloudflare_certificate_authorities_hostname_associations" "homeassistant" {
+  zone_id   = "c292442e09dde675d6f337a5f4d9e7a6"
+  hostnames = ["homeassistant.asztalos.net"]
 }

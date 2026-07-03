@@ -11,6 +11,7 @@ Creating DNS config in cloudflare
   * zone.'zone settings' (read)
   * zone.dns (edit)
   * zone.'waf' (edit) -- required for the WAF custom rules ruleset (mTLS enforcement)
+  * zone.'ssl and certificates' (edit) -- required for the mTLS hostname association
 2. Terraform Cloud account
 3. homelab-cloudflare workspace in terraform
 4. In the Terraform workspace create CLOUDFLARE_API_TOKEN environment variable (sensitive) with cloudflare API token in it

@@ -9,3 +9,12 @@ import {
   to = cloudflare_ruleset.homeassistant_mtls
   id = "zones/c292442e09dde675d6f337a5f4d9e7a6/36c2aefacdf54e4d9dfa502106660151"
 }
+
+# Adopts the zone's existing certificate-authority hostname associations
+# (already holding "homeassistant.asztalos.net" from the manual mTLS setup)
+# instead of creating a new one -- this resource is also a per-zone
+# singleton, importable by zone_id alone.
+import {
+  to = cloudflare_certificate_authorities_hostname_associations.homeassistant
+  id = "c292442e09dde675d6f337a5f4d9e7a6"
+}
