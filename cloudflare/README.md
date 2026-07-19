@@ -3,6 +3,11 @@
 For github actions TF_API_TOKEN is populated by 1password.
 You need to set OP_SERVICE_ACCOUNT_TOKEN secret in GitHub.
 ## Cloudflare
+
+> **Extended guide:** see [`CLOUDFLARE.md`](CLOUDFLARE.md) for the tunnel model,
+> DNS conventions, zone security settings, mTLS, redirects, and how it all fits
+> together. Go-live runbook for the public site: [`anitatortai-SETUP.md`](anitatortai-SETUP.md).
+
 Creating DNS config in cloudflare
 **Prerequisites:**
 1. Cloudflare account -> get API token
