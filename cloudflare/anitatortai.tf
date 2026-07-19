@@ -23,6 +23,23 @@ locals {
 
 # --- Web: apex + www → the tunnel (proxied / orange cloud) ------------------
 
+# One-time adoption of the apex CNAME that the tunnel's "add public hostname"
+# flow already created — so `apply` manages it instead of erroring on the
+# duplicate (81053). Get the record id (needs a Cloudflare API token with DNS
+# read on this zone):
+#
+#   curl -s -H "Authorization: Bearer $CF_API_TOKEN" \
+#     "https://api.cloudflare.com/client/v4/zones/94bb9c1d6ecc4db3dc899f9564def962/dns_records?type=CNAME&name=anitatortai.hu" \
+#     | jq -r '.result[0].id'
+#
+# Paste it below, `apply`, then this block can be removed (like import.tf). On a
+# fresh account there's nothing to import — delete this block and Terraform
+# creates the record itself.
+import {
+  to = cloudflare_dns_record.anitatortai_apex
+  id = "94bb9c1d6ecc4db3dc899f9564def962/86b70302fef50e11b2d10f53811736bb"
+}
+
 # Apex uses Cloudflare CNAME flattening (a CNAME at the zone root is allowed and
 # resolved to A/AAAA at the edge). Proxied so the tunnel and WAF/redirects apply.
 resource "cloudflare_dns_record" "anitatortai_apex" {
