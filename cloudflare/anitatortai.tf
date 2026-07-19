@@ -32,10 +32,6 @@ resource "cloudflare_dns_record" "anitatortai_apex" {
   content = local.anitatortai_tunnel_hostname
   proxied = true
   ttl     = 1 # 1 = automatic (required for proxied records)
-
-  lifecycle {
-    ignore_changes = [content]
-  }
 }
 
 # www is an alias of the apex; the redirect ruleset below 301s it to the apex at
