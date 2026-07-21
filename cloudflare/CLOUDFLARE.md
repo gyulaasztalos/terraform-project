@@ -87,6 +87,11 @@ admin surface stays internal-only (see the ArgoCD `apps/umami/README.md`).
 
 ## 4. Zone security settings (dashboard, one-time per zone)
 
+> For the **full walkthrough of every Free-plan setting** (account + zone), with
+> per-option verdicts and step-by-step guides, see
+> [`CLOUDFLARE-SECURITY.md`](CLOUDFLARE-SECURITY.md). The table below is just the
+> minimum this HomeLab relies on.
+
 Set these under the zone's **SSL/TLS** and **Security** tabs (Terraform's token
 can't edit them):
 
