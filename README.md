@@ -21,3 +21,7 @@ Creating B2 bucket for CNPG backup
 2. Terraform Cloud account
 3. homelab-backblaze workspace in Terraform
 4. B2_APPLICATION_KEY and B2_APPLICATION_KEY_ID environment variables (sensitive) in the Terraform workspace
+
+## License
+
+© 2026 Gyula Asztalos. Licensed under the **MIT License** — see [`LICENSE`](LICENSE).
